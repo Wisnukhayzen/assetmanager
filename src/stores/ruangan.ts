@@ -110,7 +110,7 @@ export const useRuanganStore = defineStore('ruangan', () => {
           // Revert on failure
           console.error('Failed to update room:', updateError)
           if (index !== -1) {
-            ruangans.value[index] = originalData
+            ruangans.value[index] = originalData as any;
           }
           error.value = 'Gagal mengupdate ruangan'
         } else if (data) {
@@ -144,7 +144,7 @@ export const useRuanganStore = defineStore('ruangan', () => {
         if (deleteError) {
           // Revert
           console.error('Failed to delete room:', deleteError)
-          ruangans.value.splice(index, 0, originalData) // Insert back
+          ruangans.value[index] = originalData as any; // Insert back
           error.value = 'Gagal menghapus ruangan'
         }
       })
