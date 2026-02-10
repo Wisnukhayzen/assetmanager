@@ -144,7 +144,7 @@ export const useAssetStore = defineStore('asset', () => {
         if (deleteError) {
           // Revert
           console.error('Failed to delete asset:', deleteError)
-          assets.value.splice(index, 0, originalData)
+          assets.value[index] = optimisticData as any;
           error.value = 'Gagal menghapus aset'
         }
       })
