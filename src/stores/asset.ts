@@ -96,7 +96,8 @@ export const useAssetStore = defineStore('asset', () => {
 
     // 2. Update UI Immediately
     const optimisticData = { ...originalData, ...updates, updated_at: new Date().toISOString() }
-    assets.value[index] = optimisticData
+    //assets.value[index] = optimisticData
+    assets.value[index] = optimisticData as any;
 
     // 3. Sync
     supabase
@@ -110,7 +111,7 @@ export const useAssetStore = defineStore('asset', () => {
           // Revert
           console.error('Failed to update asset:', updateError)
           if (index !== -1) {
-            assets.value[index] = originalData
+            assets.value[index] = optimisticData as any;
           }
           error.value = 'Gagal mengupdate aset'
         } else if (data) {
